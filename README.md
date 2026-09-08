@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hussein ATTRACH — Portfolio
 
-## Getting Started
+Personal developer portfolio for Hussein ATTRACH, Senior Flutter Developer and Software Engineer.
 
-First, run the development server:
+## Technology Stack
+
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS (v4)
+- **Animations:** Framer Motion
+- **Icons:** Lucide React
+
+## Local Development Instructions
+
+### Installation
+
+1. Ensure you have Node.js 18+ installed.
+2. Clone the repository and install dependencies:
+
+```bash
+npm install
+```
+
+### Run Development
+
+Start the local development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To create an optimized production build:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+This will generate a static export in the `out/` directory, ready for deployment.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is configured for GitHub Pages deployment using GitHub Actions.
 
-## Deploy on Vercel
+1. Push the code to the `main` branch of your repository (`Houssein98-at/hussein-attrach-portfolio`).
+2. Go to your repository settings -> Pages.
+3. Under "Build and deployment", set the Source to "GitHub Actions".
+4. The `.github/workflows/deploy.yml` will automatically build and deploy the site whenever you push to `main`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/app/` - Next.js App Router pages and global layout.
+- `src/components/` - Reusable UI components and page sections.
+- `src/data/` - Content and metadata (profile, experience, skills, clients, CTS data).
+- `public/` - Static assets, images, and screenshots.
+
+## Updating Content
+
+### How to update CTS screenshots
+1. Place the new images inside the appropriate subfolder in `public/images/cts/` (e.g., `public/images/cts/dashboard/`).
+2. Open `src/data/ctsData.ts`.
+3. Update the `ctsScreenshots` array with the new image paths, titles, and descriptions.
+4. Set `safeForPublic: true` if the image has been verified and sanitized (this will remove the blur and warning overlay).
+
+### How to update clients
+1. Open `src/data/clients.ts`.
+2. Add or modify the client objects in the `clientsData` array.
+
+### How to update personal information
+1. Open `src/data/profile.ts`.
+2. Update the contact links, summary, or metrics.
+
+### How to update CV
+Currently, contact buttons exist in the Footer and Contact sections. You can add a new button pointing to a PDF (e.g., placed in `public/documents/Hussein_ATTRACH_CV.pdf`) by updating the UI components where appropriate.

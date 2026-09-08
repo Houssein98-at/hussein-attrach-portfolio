@@ -1,0 +1,20 @@
+export const clientsData = [
+  { name: "Etisalat / e&", category: "Enterprise" },
+  { name: "National Academy for Childhood Development", category: "Government" },
+  { name: "Abu Dhabi Department of Finance", category: "Government" },
+  { name: "Abu Dhabi Fund for Development", category: "Government" },
+  { name: "Abu Dhabi Judicial Department", category: "Government" },
+  { name: "Abu Dhabi Ports", category: "Enterprise" },
+  { name: "Abu Dhabi Sustainable Water Solutions Company", category: "Enterprise" },
+  { name: "Abu Dhabi Systems and Information Centre", category: "Government" },
+  { name: "Department of Digital Ajman", category: "Government" },
+  { name: "Office of H.H. Sheikh Hamdan bin Zayed Al Nahyan", category: "Government" },
+  { name: "National Library and Archives", category: "Government" },
+  { name: "Presidential Protocol and Strategic Narrative Authority", category: "Government" },
+  { name: "Sheikh Zayed Grand Mosque", category: "Government" },
+  { name: "Tawazun Economic Council", category: "Government" },
+  { name: "Union Coop", category: "Enterprise" },
+  { name: "Private Office", category: "Government" },
+  { name: "The Private Department of the President", category: "Government" },
+  { name: "United Arab Emirates Ministry of Foreign Affairs", category: "Government" }
+];
