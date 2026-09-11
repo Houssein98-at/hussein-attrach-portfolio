@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { Footer } from "@/components/layout/Footer";
 import { profileData } from "@/data/profile";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -35,10 +36,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="flex-1 pb-16 md:pb-0">{children}</main>
-        <BottomNav />
-        <Footer />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Navbar />
+          <main className="flex-1 pb-16 md:pb-0">{children}</main>
+          <BottomNav />
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

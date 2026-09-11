@@ -1,20 +1,34 @@
-export const clientsData = [
-  { name: "Etisalat / e&", category: "Enterprise" },
-  { name: "National Academy for Childhood Development", category: "Government" },
-  { name: "Abu Dhabi Department of Finance", category: "Government" },
-  { name: "Abu Dhabi Fund for Development", category: "Government" },
-  { name: "Abu Dhabi Judicial Department", category: "Government" },
-  { name: "Abu Dhabi Ports", category: "Enterprise" },
-  { name: "Abu Dhabi Sustainable Water Solutions Company", category: "Enterprise" },
-  { name: "Abu Dhabi Systems and Information Centre", category: "Government" },
-  { name: "Department of Digital Ajman", category: "Government" },
-  { name: "Office of H.H. Sheikh Hamdan bin Zayed Al Nahyan", category: "Government" },
-  { name: "National Library and Archives", category: "Government" },
-  { name: "Presidential Protocol and Strategic Narrative Authority", category: "Government" },
-  { name: "Sheikh Zayed Grand Mosque", category: "Government" },
-  { name: "Tawazun Economic Council", category: "Government" },
-  { name: "Union Coop", category: "Enterprise" },
-  { name: "Private Office", category: "Government" },
-  { name: "The Private Department of the President", category: "Government" },
-  { name: "United Arab Emirates Ministry of Foreign Affairs", category: "Government" }
+import { Building2, Landmark, Smartphone, Webhook, ShieldCheck, Languages } from "lucide-react";
+
+export const experienceAreas = [
+  {
+    title: "Government Solutions",
+    description: "Experience working on CTS implementations for UAE government entities, supporting secure correspondence, workflows, approvals, and digital document operations.",
+    icon: Landmark
+  },
+  {
+    title: "Enterprise Solutions",
+    description: "Experience supporting enterprise organizations with high-volume correspondence management, document workflows, integrations, and operational processes.",
+    icon: Building2
+  },
+  {
+    title: "Mobile CTS",
+    description: "Development and enhancement of Flutter-based mobile CTS applications, including inbox management, correspondence actions, search, attachments, dashboards, notifications, and secure access.",
+    icon: Smartphone
+  },
+  {
+    title: "System Integration",
+    description: "Experience working with enterprise integrations, APIs, authentication/SSO, email-based correspondence, notifications, and external systems.",
+    icon: Webhook
+  },
+  {
+    title: "Production Support & UAT",
+    description: "Hands-on involvement in production support, troubleshooting, UAT coordination, defect management, client feedback, releases, and deployment validation.",
+    icon: ShieldCheck
+  },
+  {
+    title: "Bilingual Experience",
+    description: "Experience delivering Arabic and English interfaces for UAE organizations, including RTL support and government-oriented workflows.",
+    icon: Languages
+  }
 ];

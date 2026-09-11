@@ -5,36 +5,26 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Home, Briefcase, FileText, Mail, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 export function BottomNav() {
   const pathname = usePathname();
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (document.documentElement.classList.contains("dark")) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTheme("dark");
-    }
+    setMounted(true);
   }, []);
 
   const toggleTheme = () => {
-    if (theme === "light") {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-      localStorage.theme = "dark";
-    } else {
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
-      localStorage.theme = "light";
-    }
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   const navItems = [
     { name: "Home", href: "/", icon: Home },
     { name: "Experience", href: "/#experience", icon: Briefcase },
     { name: "CTS", href: "/projects/cts", icon: FileText },
-    { name: "Contact", href: "#contact", icon: Mail },
+    { name: "Contact", href: "/#contact", icon: Mail },
   ];
 
   return (
@@ -60,7 +50,7 @@ export function BottomNav() {
           onClick={toggleTheme}
           className="flex flex-col items-center justify-center w-full h-full space-y-1 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
         >
-          {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+          {mounted && theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
           <span>Theme</span>
         </button>
       </div>

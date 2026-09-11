@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { ctsScreenshots } from "@/data/ctsData";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, AlertTriangle, Maximize2 } from "lucide-react";
+import { X, Maximize2, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 
@@ -31,7 +31,18 @@ export function ScreenshotGallery() {
 
   return (
     <div className="py-12">
-      <h3 className="font-serif text-2xl font-bold mb-8">Selected Application Screens</h3>
+      <div className="mb-8">
+        <div className="flex items-center gap-3 mb-3">
+          <h3 className="font-serif text-2xl font-bold">Selected Application Screens</h3>
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-500/80 text-xs font-medium border border-amber-500/20">
+            <ShieldCheck size={14} />
+            Privacy Protected
+          </span>
+        </div>
+        <p className="text-sm text-muted-foreground max-w-2xl">
+          Selected interface examples from my work on enterprise CTS solutions. Identifiable information has been intentionally obscured to protect client and user confidentiality.
+        </p>
+      </div>
       
       <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory px-4 md:px-2 scroll-px-4 md:scroll-px-2 scrollbar-hide w-full">
         {ctsScreenshots.map((screenshot, index) => (
@@ -46,20 +57,29 @@ export function ScreenshotGallery() {
                 <div className="w-1/3 h-full bg-zinc-900 dark:bg-zinc-800 rounded-b-xl"></div>
               </div>
               
-              {screenshot.safeForPublic === false && (
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-background/80 backdrop-blur-md p-4 text-center">
-                  <AlertTriangle className="text-amber-500 mb-2" size={32} />
-                  <span className="text-sm font-medium">Image requires sanitization.</span>
-                </div>
-              )}
-              
               <Image 
                 src={screenshot.image} 
                 alt={screenshot.alt}
                 fill
-                className={`object-cover object-top ${screenshot.safeForPublic === false ? 'blur-md' : ''}`}
+                className="object-cover object-top"
                 sizes="(max-width: 768px) 280px, 320px"
               />
+
+              {/* Privacy Masking */}
+              {(screenshot as any).blurRegions?.map((region: any, rIdx: number) => (
+                <div 
+                  key={rIdx}
+                  className="absolute z-10 bg-background/50 backdrop-blur-md"
+                  style={{
+                    top: region.top,
+                    left: region.left,
+                    right: region.right,
+                    width: region.width,
+                    height: region.height,
+                    borderRadius: region.borderRadius || '4px'
+                  }}
+                />
+              ))}
               
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors z-10 flex items-center justify-center opacity-0 group-hover:opacity-100">
                 <div className="bg-background/90 text-foreground p-3 rounded-full backdrop-blur-sm shadow-sm transform translate-y-4 group-hover:translate-y-0 transition-all">
@@ -114,22 +134,28 @@ export function ScreenshotGallery() {
                   <div className="w-1/3 h-full bg-zinc-900 dark:bg-zinc-800 rounded-b-2xl"></div>
                 </div>
                 
-                {ctsScreenshots[selectedImage].safeForPublic === false && (
-                  <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-background/80 backdrop-blur-xl p-8 text-center">
-                    <AlertTriangle className="text-amber-500 mb-4" size={48} />
-                    <h4 className="text-xl font-bold mb-2">Sanitization Required</h4>
-                    <p className="text-sm text-muted-foreground max-w-xs">
-                      This screenshot contains potentially sensitive enterprise data.
-                    </p>
-                  </div>
-                )}
-                
                 <Image 
                   src={ctsScreenshots[selectedImage].image} 
                   alt={ctsScreenshots[selectedImage].alt}
                   fill
-                  className={`object-cover object-top ${ctsScreenshots[selectedImage].safeForPublic === false ? 'blur-xl' : ''}`}
+                  className="object-cover object-top"
                 />
+
+                {/* Privacy Masking */}
+                {(ctsScreenshots[selectedImage] as any).blurRegions?.map((region: any, rIdx: number) => (
+                  <div 
+                    key={rIdx}
+                    className="absolute z-10 bg-background/50 backdrop-blur-xl"
+                    style={{
+                      top: region.top,
+                      left: region.left,
+                      right: region.right,
+                      width: region.width,
+                      height: region.height,
+                      borderRadius: region.borderRadius || '4px'
+                    }}
+                  />
+                ))}
               </div>
               
               <div className="mt-6 text-center max-w-md bg-card border border-border p-4 rounded-xl shadow-sm">

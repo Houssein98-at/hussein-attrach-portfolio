@@ -6,39 +6,19 @@ import { cn } from "@/lib/utils";
 import { profileData } from "@/data/profile";
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export function Navbar() {
   const pathname = usePathname();
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Check initial theme
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-    } else {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
-    }
+    setMounted(true);
   }, []);
 
   const toggleTheme = () => {
-    if (theme === "light") {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-      localStorage.theme = "dark";
-    } else {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
-      localStorage.theme = "light";
-    }
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   const navLinks = [
@@ -68,12 +48,12 @@ export function Navbar() {
               </li>
             ))}
             <li>
-              <a 
-                href="#contact" 
+              <Link 
+                href="/#contact" 
                 className="text-sm font-medium text-muted-foreground hover:text-accent transition-colors"
               >
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
           <button
@@ -81,7 +61,7 @@ export function Navbar() {
             className="p-2 rounded-full hover:bg-muted transition-colors"
             aria-label="Toggle theme"
           >
-            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+            {mounted && theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         </div>
       </div>
